@@ -1,18 +1,26 @@
 import { Investment } from './domain/investment';
+import { LoanCalculator } from './calculators';
 
 export class App {
   constructor() {
-    this.investments = [ new Investment('Loan') ];
+    this.investments = [];
+    this.results = [];
   }
 
   attached() {
-    let collapsible = document.querySelectorAll('.collapsible');
-    M.Collapsible.init(collapsible);
-    let selects = document.querySelectorAll('select');
-    M.FormSelect.init(selects);
+    this.addNew();
   }
 
-  addLoan() {
-    this.investments.push(new Investment('Loan'));
+  addNew = () => {
+    this.investments.push(new Investment(this.investmentUpdated, 'Loan', '', null, null, null, 'Monthly'));
+  }
+
+  investmentUpdated = () => {
+    this.results = [];
+    this.investments.forEach(investment => {
+      if (investment.type === 'Loan') {
+        this.results.push(LoanCalculator.run(investment));
+      }
+    });
   }
 }

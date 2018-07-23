@@ -1,0 +1,49 @@
+<template>
+  <require from="../customAttributes/initSelectCustomAttribute"></require>
+  <require from="../customAttributes/openCollapsibleCustomAttribute"></require>
+  <require from="../customAttributes/updateTextFieldsCustomAttribute"></require>
+
+  <ul class="collapsible">
+    <li repeat.for="investment of investments" open-collapsible update-text-fields>
+      <div class="collapsible-header"><i class="material-icons">account_balance</i>${investment.title}</div>
+      <div class="collapsible-body" init-select>
+        <div class="input-field">
+          <input id="title" type="text" class="validate" value.bind="investment.title">
+          <label for="title">Title</label>
+        </div>
+        <div class="input-field">
+          <select value.bind="investment.type">
+            <option value="Loan">Loan</option>
+            <option value="Investment">Investment</option>
+          </select>
+          <label>Type</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">attach_money</i>
+          <input id="starting_balance" type="number" class="validate" value.bind="investment.startingBalance">
+          <label for="starting_balance">Starting Balance</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">%</i>
+          <input id="interest_rate" step=".01" type="number" class="validate" value.bind="investment.interestRate">
+          <label for="interest_rate">Interest Rate</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">attach_money</i>
+          <input id="payment" type="number" class="validate" value.bind="investment.increment">
+          <label for="payment">Payment</label>
+        </div>
+        <div class="input-field">
+          <select value.bind="investment.incrementFrequency">
+            <option value="Monthly">Monthly</option>
+            <option value="Semi-Monthly">Semi-Monthly</option>
+            <option value="Bi-Weekly">Bi-Weekly</option>
+            <option value="Weekly">Weekly</option>
+          </select>
+          <label>Frequency</label>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <a class="btn-floating btn-large waves-effect waves-light red" click.trigger="addNew()"><i class="material-icons">add</i></a>
+</template>

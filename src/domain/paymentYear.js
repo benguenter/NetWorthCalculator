@@ -1,4 +1,4 @@
-import { CurrencyFormatter } from '../utils/currencyFormatter';
+import { FormatCurrency } from '../utils';
 
 export class PaymentYear {
   constructor(payments, year) {
@@ -8,6 +8,7 @@ export class PaymentYear {
     this.endingBalance = payments[payments.length - 1].endingBalance;
     this.payments = payments;
     this.year = year;
-    this.formatter = CurrencyFormatter;
   }
+
+  formatCurrency = FormatCurrency;
 }

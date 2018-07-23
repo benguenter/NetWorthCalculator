@@ -1,4 +1,4 @@
-import { CurrencyFormatter } from '../utils/currencyFormatter';
+import { FormatCurrency, FormatDate } from '../utils';
 
 export class Payment {
   constructor(date, startingBalance, value, interestPaid, endingBalance) {
@@ -9,5 +9,6 @@ export class Payment {
     this.endingBalance = endingBalance;
   }
 
-  formatter = CurrencyFormatter;
+  formatCurrency = FormatCurrency;
+  formatDate = FormatDate;
 }

@@ -1,2 +1,3 @@
-export * from './CurrencyFormatter';
-export * from './GroupBy';
+export * from './currencyFormatter';
+export * from './dateFormatter';
+export * from './groupby';

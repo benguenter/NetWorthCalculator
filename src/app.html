@@ -4,69 +4,19 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo"><i class="material-icons large">insert_chart</i> Net Worth Calculator</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <!-- <li><a href="sass.html">Sass</a></li> -->
       </ul>
     </div>
   </nav>
   <div class="row">
-    <div class="col s2">
-      <ul class="collapsible">
-        <li class="active" repeat.for="investment of investments">
-          <div class="collapsible-header"><i class="material-icons">account_balance</i>${investment.title}</div>
-          <div class="collapsible-body">
-            <div class="input-field">
-              <input id="title" type="text" class="validate" value.bind="investment.title">
-              <label for="title">Title</label>
-            </div>
-            <div class="input-field">
-              <select value.bind="investment.type">
-                <option value="Loan">Loan</option>
-                <option value="Investment">Investment</option>
-              </select>
-              <label>Type</label>
-            </div>
-            <div class="input-field">
-              <i class="material-icons prefix">attach_money</i>
-              <input id="starting_balance" type="number" class="validate" value.bind="investment.startingBalance">
-              <label for="starting_balance">Starting Balance</label>
-            </div>
-            <div class="input-field">
-              <i class="material-icons prefix">%</i>
-              <input id="interest_rate" step=".01" type="number" class="validate" value.bind="investment.interestRate">
-              <label for="interest_rate">Interest Rate</label>
-            </div>
-            <div class="input-field">
-              <i class="material-icons prefix">attach_money</i>
-              <input id="monthly_payment" type="number" class="validate" value.bind="investment.increment">
-              <label for="monthly_payment">Monthly Payment</label>
-            </div>
-          </div>
-        </li>
-      </ul>
-      
-      <a class="btn-floating btn-large waves-effect waves-light red" click.trigger="addLoan()"><i class="material-icons">add</i></a>
+    <div class="col l2">
+      <compose view-model="./views/investments"
+              view="./views/investments.html"
+              model.bind="{ investments, investmentUpdated, addNew }"></compose>
     </div>
-    <div class="col s10" repeat.for="investment of investments">
-      <table class="striped">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Balance Start</th>
-            <th>Payment</th>
-            <th>Interest Paid</th>
-            <th>Balance End</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr repeat.for="year of investment.years">
-            <td>${year.year}</td>
-            <td>${year.formatter.format(year.startingBalance)}</td>
-            <td>${year.formatter.format(year.totalPayments)}</td>
-            <td>${year.formatter.format(year.totalInterestPaid)}</td>
-            <td>${year.formatter.format(year.endingBalance)}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col l5" repeat.for="result of results">
+      <compose view-model="./views/result"
+              view="./views/result.html"
+              model.bind="result"></compose>
     </div>
   </div>
 </template>
