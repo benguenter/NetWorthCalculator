@@ -4,7 +4,7 @@
   <require from="../customAttributes/updateTextFieldsCustomAttribute"></require>
 
   <ul class="collapsible">
-    <li repeat.for="investment of investments" open-collapsible update-text-fields>
+    <li repeat.for="investment of investmentProvider.investments" open-collapsible update-text-fields>
       <div class="collapsible-header"><i class="material-icons">account_balance</i>${investment.title}</div>
       <div class="collapsible-body" init-select>
         <div class="input-field">
@@ -45,5 +45,5 @@
       </div>
     </li>
   </ul>
-  <a class="btn-floating btn-large waves-effect waves-light red" click.trigger="addNew()"><i class="material-icons">add</i></a>
+  <a class="btn-floating btn-large waves-effect waves-light red" click.trigger="investmentProvider.addNew()"><i class="material-icons">add</i></a>
 </template>

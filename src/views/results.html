@@ -1,0 +1,37 @@
+<template>
+  <div class="col l5" repeat.for="result of results">
+    <h3>${result.title}</h3>
+    <ul class="collapsible">
+      <li repeat.for="year of result.years">
+        <div class="collapsible-header" style="text-align:center">
+          <div class="col s3"><i class="material-icons">account_balance</i>${year.year}</div>
+          <div class="col s3">Balance Paid <br/> ${year.formatCurrency(year.startingBalance - year.endingBalance)}</div>
+          <div class="col s3">Interest Paid <br/> ${year.formatCurrency(year.totalInterestPaid)}</div>
+          <div class="col s3">Remaining <br/> ${year.formatCurrency(year.endingBalance)}</div>
+        </div>
+        <div class="collapsible-body">
+          <table class="striped">
+            <thead>
+              <tr>
+                <th>Pament Date</th>
+                <th>Balance Start</th>
+                <th>Payment</th>
+                <th>Interest Paid</th>
+                <th>Balance End</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr repeat.for="payment of year.payments">
+                <td>${payment.formatDate(payment.date)}</td>
+                <td>${payment.formatCurrency(payment.startingBalance)}</td>
+                <td>${payment.formatCurrency(payment.value)}</td>
+                <td>${payment.formatCurrency(payment.interestPaid)}</td>
+                <td>${payment.formatCurrency(payment.endingBalance)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ul>
+  </div>
+</template>

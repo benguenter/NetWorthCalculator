@@ -1,10 +1,11 @@
-import { observable } from 'aurelia-framework';
+import { observable, transient } from 'aurelia-framework';
 
 @observable({ name: 'type', changeHandler: 'updated' })
 @observable({ name: 'startingBalance', changeHandler: 'updated' })
 @observable({ name: 'interestRate', changeHandler: 'updated' })
 @observable({ name: 'increment', changeHandler: 'updated' })
 @observable({ name: 'incrementFrequency', changeHandler: 'updated' })
+@transient()
 export class Investment {
   type;
   startingBalance;

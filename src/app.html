@@ -1,5 +1,8 @@
 <template>
   <require from="./app.css"></require>
+  <require from="./views/investments"></require>
+  <require from="./views/results"></require>
+  <require from="./views/investment-summary"></require>
   <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo"><i class="material-icons large">insert_chart</i> Net Worth Calculator</a>
@@ -9,14 +12,9 @@
   </nav>
   <div class="row">
     <div class="col l2">
-      <compose view-model="./views/investments"
-              view="./views/investments.html"
-              model.bind="{ investments, investmentUpdated, addNew }"></compose>
+      <investments></investments>
     </div>
-    <div class="col l5" repeat.for="result of results">
-      <compose view-model="./views/result"
-              view="./views/result.html"
-              model.bind="result"></compose>
-    </div>
+    <investment-summary></investment-summary>
+    <results></results>
   </div>
 </template>
