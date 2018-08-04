@@ -11,4 +11,15 @@ export class PaymentYear {
   }
 
   formatCurrency = FormatCurrency;
+
+  summary = (type) => {
+    if (type === 'Loan') {
+      return {
+        EndingBalance: Math.round(this.endingBalance * -1)
+      };
+    }
+    return {
+      EndingBalance: Math.round(this.endingBalance)
+    }
+  }
 }

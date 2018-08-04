@@ -12,30 +12,36 @@ export class InvestmentSummaryCustomElement {
 
   updated = () => {
     if (this.chart) {
-      this.chart.load(this.regenerate());
+      this.chart.load({columns: this.regenerateData()});
+      this.chart.groups(this.regenerateGroups());
     }
   }
 
-  regenerate = () => {
-    const types = {};
+  regenerateGroups = () => {
+    return [this.results.map((investment) => investment.title)];
+  }
+
+  regenerateData = () => {
     const x = ['x'].concat(this.results[0].years.map((paymentYear) => paymentYear.year));
-    const columns = this.results.map((val) => {
-      types[val.title] = 'area-spline';
-      return [val.title]
-        .concat(val.years.map((year) => Math.round(year.endingBalance * -1)));
+    const columns = [x];
+    this.results.forEach(investment => {
+      let title = investment.title;
+      columns.push([title]
+        .concat(investment.years.map(
+          (year) => year.summary(investment.type).EndingBalance)));
     });
-    columns.push(x);
-    return {
-      x: 'x',
-      types: types,
-      columns: columns
-    };
+    return columns;
   }
 
   attached() {
     this.chart = c3.generate({
       bindto: '#chart',
-      data: this.regenerate(),
+      data: {
+        x: 'x',
+        type: 'area-spline',
+        columns: this.regenerateData(),
+        groups: this.regenerateGroups()
+      },
       axis: {
         y: {
           tick: {

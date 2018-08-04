@@ -1,5 +1,5 @@
 import { inject } from 'aurelia-framework';
-import { LoanCalculator } from '../calculators';
+import { LoanCalculator, InvestmentCalculator } from '../calculators';
 import { Api } from './api';
 
 @inject(Api)
@@ -16,6 +16,9 @@ export class ResultsProvider {
     this.investments.forEach(investment => {
       if (investment.type === 'Loan') {
         this.results.push(LoanCalculator.run(investment));
+      }
+      if (investment.type === 'Investment') {
+        this.results.push(InvestmentCalculator.run(investment));
       }
     });
   }
